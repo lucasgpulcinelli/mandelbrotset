@@ -17,7 +17,7 @@ use "make" to build the project and use build/main to run the program
 
 A simple exploratory run (after using imagemagik) created this gif:
 
-<img src="./showcase.gif" width="375"
+<img src="./showcase.gif" width="375">
 
 (it is a bit choppy as a smooth animation is not yet possible)
 
