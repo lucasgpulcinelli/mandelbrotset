@@ -9,6 +9,7 @@ with interesting properties. As such there is an interest for making a program w
 
 ### packages needed
 libjpeg-lib libpng-dev make gcc (or another C compiler toolchain) and python3
+pip modules used: ctypes
 
 ### instructions
 use "make" to build the project and, after changing the directory to build use "./main.py" to run the program
