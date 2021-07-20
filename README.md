@@ -1,4 +1,4 @@
-# Mandelbrot set implementando
+# Mandelbrot set implementation
 
 ## A simple implementation in C and python of a method for seeing and zooming in the mandelbrot set
 
