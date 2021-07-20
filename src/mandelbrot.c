@@ -15,6 +15,68 @@ a one million pixel width image, a reasonable amount
 #define SCANS_PER_WRITE 256
 
 
+/*
+remaps the maximum and minimum value for the mandelbrot set, enabling zooming in
+the possible sections are in a numpad-like grid, slightly change to make the property below
+note: this function always divide the area between mandmin and mandmax by four,
+always preserving the aspect ratio between them
+*/
+void remap_mands(complex* mandmin, complex* mandmax, int section)
+{   
+    complex tmp = {mandmax->re - mandmin->re, mandmax->im - mandmin->im};
+
+    switch(section)
+    {
+    case 0:
+        break;
+    case 1:
+        mandmin->im = (mandmin->im + mandmax->im)/2;
+        mandmax->re = (mandmin->re + mandmax->re)/2;
+        break;
+    case 2:
+        mandmin->re+= 1*(tmp.re)/4;
+        mandmin->im =   (mandmax->im + mandmin->im)/2;
+        mandmax->re-= 1*(tmp.re)/4;
+        break;
+    case 3:
+        mandmin->re = (mandmin->re + mandmax->re)/2;
+        mandmin->im = (mandmin->im + mandmax->im)/2;
+        break;
+    case 4:
+        mandmin->im+= 1*(tmp.im)/4;
+        mandmax->re =   (mandmax->re + mandmin->re)/2;
+        mandmax->im-= 1*(tmp.im)/4;
+        break;
+    case 5:
+        mandmin->re+= 1*(tmp.re)/4;
+        mandmin->im+= 1*(tmp.im)/4;
+        mandmax->re-= 1*(tmp.re)/4;
+        mandmax->im-= 1*(tmp.im)/4;
+        break;
+    case 6:
+        mandmin->im+= 1*(tmp.im)/4;
+        mandmin->re =   (mandmax->re + mandmin->re)/2;
+        mandmax->im-= 1*(tmp.im)/4;
+        break;
+    case 7:
+        mandmax->re = (mandmin->re + mandmax->re)/2;
+        mandmax->im = (mandmin->im + mandmax->im)/2;
+        break;
+    case 8:
+        mandmin->re+= 1*(tmp.re)/4;
+        mandmax->im =   (mandmax->im + mandmin->im)/2;
+        mandmax->re-= 1*(tmp.re)/4;
+        break;
+    case 9:
+        mandmin->re = (mandmin->re + mandmax->re)/2;
+        mandmax->im = (mandmin->im + mandmax->im)/2;
+        break;
+    }
+
+    return;
+}
+
+
 //simple function to allocate a two dimensional buffer with NULL checking
 unsigned char** alloc_charpp(int rows, int cols)
 {
