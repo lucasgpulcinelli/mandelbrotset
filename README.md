@@ -1,6 +1,6 @@
-# Mandelbrot set C
+# Mandelbrot set implementando
 
-## A simple implementation in C of a method for seeing and zooming in the mandelbrot set
+## A simple implementation in C and python of a method for seeing and zooming in the mandelbrot set
 
 The mandelbrot set is a set of all complex numbers C that converge with the repeated application of the function Z_n = (Z_n-1)^2 + C, yeilding a unique self repeating pattern
 with interesting properties. As such there is an interest for making a program with the objective of understanding the set and learning about generalized image manipulation.
@@ -8,10 +8,10 @@ with interesting properties. As such there is an interest for making a program w
 ## Build instructions
 
 ### packages needed
-libjpeg-lib libpng-dev make gcc (or another C compiler toolchain)
+libjpeg-lib libpng-dev make gcc (or another C compiler toolchain) and python3
 
 ### instructions
-use "make" to build the project and use build/main to run the program
+use "make" to build the project and, after changing the directory to build use "./main.py" to run the program
 
 ## Showcase
 
