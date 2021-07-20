@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import ctypes
 import os
 
@@ -10,7 +11,7 @@ class c_complex(ctypes.Structure):
         self.im = pycomplex.imag
 
 
-libmandel = ctypes.CDLL(os.getcwd() + "/../build/libmandel.so")
+libmandel = ctypes.CDLL(os.getcwd() + "/libmandel.so")
 
 libmandel.makemandel.argtypes = [ctypes.c_char_p,
                                 ctypes.c_int, ctypes.c_int, 
@@ -23,10 +24,10 @@ libmandel.remap_mands.argtypes = [ctypes.POINTER(c_complex),
 
 
 def makemandel(file, height, width, mandmin, mandmax, steps_for_inf):
-    libmandel.makemandel(
+    return int(libmandel.makemandel(
         file.encode("utf-8"), 
         height, width, c_complex(mandmin), c_complex(mandmax), steps_for_inf
-    )
+    ))
 
 def remap_mands(mandmin, mandmax, section):
     cmandmin = c_complex(mandmin)
