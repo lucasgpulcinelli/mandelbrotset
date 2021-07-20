@@ -1,21 +1,25 @@
 
 MKDIR ?= mkdir -p
 
-BUILDD?=./build
+BUILDD ?=./build
 SRCD =./src
+SHAREDLIB  ?=$(BUILDD)/libmandel.so
 
 C_FILES = $(wildcard $(SRCD)/*.c)
 O_FILES = $(patsubst %.c,%.o, $(C_FILES))
 
-CFLAGS +=-Wall -O3
-LDFLAGS +=-ljpeg -lpng
+CFLAGS +=-Wall -O3 -fPIC
+LDFLAGS +=-ljpeg -lpng -shared
 
-all: $(BUILDD)/main
 
-$(BUILDD)/main: $(O_FILES)
+.PHONY: all clean
+
+all: $(SHAREDLIB)
+
+$(SHAREDLIB): $(O_FILES)
 	@$(MKDIR) $(BUILDD)
-	$(CC) $(LDFLAGS) $(O_FILES) -o $(BUILDD)/main
+	$(CC) $(LDFLAGS) $(O_FILES) -o $(EXECUTABLE)
 
 clean:
 	@$(RM) -f $(O_FILES)
-	@$(RM) -f $(BUILDD)/main
+	@$(RM) -f $(SHAREDLIB)
